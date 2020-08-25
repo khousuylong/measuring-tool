@@ -1,6 +1,4 @@
-import React from 'react'
-import styles from './styles.module.css'
+import AdminSearch from './admin/search'
+import ClientSearch from './client/search'
 
-export const ExampleComponent = ({ text }) => {
-  return <h1 className={styles.test}>This is H1: Example Component: {text}<h2>And this is h2</h2></h1>
-}
+export {AdminSearch, ClientSearch}

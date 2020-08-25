@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ExampleComponent } from 'search'
+import { AdminSearch, ClientSearch } from 'search'
 import 'search/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <React.Fragment><AdminSearch /><ClientSearch /></React.Fragment>
 }
 
 export default App
