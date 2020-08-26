@@ -1,30 +1,20 @@
 import React from 'react'
 import styles from '../styles.module.css'
 import { Button } from '@material-ui/core'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import {MAP_QUERY} from  '../queries/mapQuery'
 
-const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
-`
 
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES)
+function Map() {
+
+  const { loading, error, data } = useQuery(MAP_QUERY, {
+    variables: { id: "b72c736a-97de-11e9-a3b3-080027899e1a"}
+  })
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        <h1>{currency}</h1>: {rate}
-      </p>
-    </div>
-  ))
+  return(<div>{data.map.name}</div>)
 }
 
 const AdminSearch = ({ text }) => {
@@ -32,7 +22,7 @@ const AdminSearch = ({ text }) => {
     <div>
       <h1 className={styles.test}>This is admin</h1>
       <Button color="primary">Hello World</Button>
-      <ExchangeRates />
+      <Map />
     </div>
   )
 }
