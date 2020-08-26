@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 const AdminSearch = ({ text }) => {
   return(
     <div>
-      <h1 className={styles.test}>This is H1: Example Component: {text}</h1>
+      <h1 className={styles.test}>This is admin</h1>
       <Button color="primary">Hello World</Button>
     </div>
   )
