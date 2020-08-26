@@ -1,4 +1,5 @@
 import React from 'react'
+import { ApolloProvider } from '@apollo/client';
 import styles from '../styles.module.css'
 import { Button } from '@material-ui/core'
 import { useQuery } from '@apollo/client'
@@ -17,13 +18,15 @@ function Map() {
   return(<div>{data.map.name}</div>)
 }
 
-const AdminSearch = ({ text }) => {
+const AdminSearch = (props) => {
   return(
-    <div>
-      <h1 className={styles.test}>This is admin</h1>
-      <Button color="primary">Hello World</Button>
-      <Map />
-    </div>
+    <ApolloProvider client={props.client}>
+      <div>
+        <h1 className={styles.test}>This is admin</h1>
+        <Button color="primary">Hello World</Button>
+        <Map />
+      </div>
+    </ApolloProvider>
   )
 }
 

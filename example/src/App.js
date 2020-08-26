@@ -21,9 +21,7 @@ const client = new ApolloClient({
 
 const App = () => {
   return(
-    <ApolloProvider client={client}>
-      <React.Fragment><AdminSearch /><ClientSearch /></React.Fragment>
-    </ApolloProvider>
+    <React.Fragment><AdminSearch client={client} /><ClientSearch /></React.Fragment>
   ) 
 }
 
