@@ -1,5 +1,4 @@
 import React from 'react'
-import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { AdminSearch, ClientSearch } from 'search'
 import { withStyles } from '@material-ui/core/styles';
@@ -25,7 +24,6 @@ const styles = theme => ({
 });
 
 const client = new ApolloClient({
-  //uri: 'https://48p1r2roz4.sse.codesandbox.io',
   link: new SchemaLink({ schema }),
   cache: new InMemoryCache()
 });
@@ -37,7 +35,7 @@ const App = props => {
       <div className={classes.container}>
         <AdminSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3" />
         <Divider style={{marginTop: 20}} />
-        <ClientSearch />
+        <ClientSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3"/>
       </div>
     </React.Fragment>
   ) 

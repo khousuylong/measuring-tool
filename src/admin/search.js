@@ -1,31 +1,70 @@
 import React from 'react'
-import { ApolloProvider } from '@apollo/client';
-import styles from '../styles.module.css'
-import { Button } from '@material-ui/core'
-import { useQuery } from '@apollo/client'
-import {MAP_QUERY} from  '../queries/mapQuery'
-
-
-function Map() {
-
-  const { loading, error, data } = useQuery(MAP_QUERY, {
-    variables: { id: "b72c736a-97de-11e9-a3b3-080027899e1a"}
-  })
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
-
-  return(<div>{data.map.name}</div>)
-}
+import { ApolloProvider, useMutation } from '@apollo/client'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
+import Button from '@material-ui/core/Button'
+import {UPDATE_PLUGIN_SETTING_MUTATION} from '../queries/pluginQuery'
 
 const AdminSearch = (props) => {
+  const [selectedValue, setSelectedValue] = React.useState('metric');
+
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value)
+  }
+
+  const Form = () => {
+    const [saveSetting] = useMutation(UPDATE_PLUGIN_SETTING_MUTATION);
+
+    const save = async event => {
+      event.preventDefault()
+      const payload = {
+        metrix: selectedValue
+      }
+      const data = await saveSetting({ variables: { id: props.settingId, setting: JSON.stringify(payload) }});
+    }
+
+    return(
+      <form onSubmit={save}>
+        <FormControl component="fieldset" >
+          <FormLabel component="legend">Unit of Measurement</FormLabel>
+          <RadioGroup defaultValue="metric" aria-label="gender" name="customized-radios">
+            <FormControlLabel value="metric" control={
+              <Radio
+                checked={selectedValue === 'metric'}
+                onChange={handleChange}
+                value="metric"
+                color="default"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': 'Metric' }}
+              />
+            } label="Kilometers / Hectares / Meters" />
+            <FormControlLabel value="imperial" control={
+              <Radio
+                checked={selectedValue === 'imperial'}
+                onChange={handleChange}
+                value="imperial"
+                color="default"
+                name="radio-button-demo"
+                inputProps={{ 'aria-label': 'Imperial' }}
+              />
+            } label="Miles / Acres / Feet" />
+          </RadioGroup>
+          <Button type="submit" variant="outlined" color="primary">
+            Save
+          </Button>
+        </FormControl>
+      </form>
+    )
+  }
+
   return(
     <ApolloProvider client={props.client}>
-      <div>
-        <h1 className={styles.test}>This is admin</h1>
-        <Button color="primary">Hello World</Button>
-        <Map />
-      </div>
+      <h3>Setting</h3>
+      <Form />        
     </ApolloProvider>
   )
 }

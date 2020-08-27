@@ -2,6 +2,12 @@ import axios from 'axios';
 
 
 const resolvers = {
+  Query: {
+      pluginSetting: async (root, args, context, info) => {
+        const pluginSetting = (await axios.get(`http://localhost:3004/pluginSettings/${args.id}`)).data;
+        return pluginSetting;
+      }
+  },
   Mutation: {
     updatePluginSetting: async (root, args, context, info) => {
       const pluginSetting = (await axios.get(`http://localhost:3004/pluginSettings/${args.id}`)).data;
