@@ -1,12 +1,12 @@
 import React from 'react'
-import { ApolloProvider, useMutation } from '@apollo/client'
+import { ApolloProvider, useMutation, useQuery } from '@apollo/client'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import Button from '@material-ui/core/Button'
-import {UPDATE_PLUGIN_SETTING_MUTATION} from '../queries/pluginQuery'
+import {UPDATE_PLUGIN_SETTING_MUTATION, PLUGIN_SETTING_QUERY} from '../queries/pluginQuery'
 
 const AdminSearch = (props) => {
   const [selectedValue, setSelectedValue] = React.useState('metric');
@@ -25,6 +25,15 @@ const AdminSearch = (props) => {
         metrix: selectedValue
       }
       const data = await saveSetting({ variables: { id: props.settingId, setting: JSON.stringify(payload) }});
+      console.log('data return', data)
+      if(data){
+        props.client.writeQuery({
+          query: PLUGIN_SETTING_QUERY,
+          data: {
+            pluginSetting: data.updatePluginSetting
+          }
+        })
+      }
     }
 
     return(

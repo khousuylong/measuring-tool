@@ -14,6 +14,8 @@ const UPDATE_PLUGIN_SETTING_MUTATION = gql`
   mutation($id: ID!, $setting: String){
     updatePluginSetting(id: $id, setting: $setting){
       id
+      pluginId
+      setting
     }
   }
 `

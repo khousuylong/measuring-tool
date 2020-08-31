@@ -6,13 +6,13 @@ import {PLUGIN_SETTING_QUERY} from '../queries/pluginQuery'
 
 const ClientSearch = (props) => {
   const position = [51.505, -0.09]
+
   const RenderMap = () => {
-    const { loading, error, data } = useQuery(PLUGIN_SETTING_QUERY, {
+    const {data} = useQuery(PLUGIN_SETTING_QUERY, {
       variables: { id: props.settingId}
     })
-    if (loading) return 'Loading...'
-    if (error) return `Error! ${error.message}`
 
+    if(data)
     console.log('this is data', data)
 
     return(
