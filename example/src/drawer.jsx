@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
+import { ClientSearch } from 'search'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Button from '@material-ui/core/Button'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft' 
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
   }
 });
 
-const SwipeableTemporaryDrawer = function() {
+const SwipeableTemporaryDrawer = function(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -73,7 +74,7 @@ const SwipeableTemporaryDrawer = function() {
       className={clsx(classes.list)}
       role="presentation"
     >
-			this is content
+			<ClientSearch client={props.client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3"/>
     </div>
   );
 	

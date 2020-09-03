@@ -11,6 +11,8 @@ const ClientSearch = (props) => {
       variables: { id: props.settingId}
     })
 
+    console.log('this is data', data)
+
     return(
       <div>this is setting</div>
     )

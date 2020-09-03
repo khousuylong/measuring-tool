@@ -1,6 +1,5 @@
 import React from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { AdminSearch, ClientSearch } from 'search'
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
@@ -44,17 +43,13 @@ class App extends React.Component {
   render() {
     return(
       <React.Fragment>
-        <AdminSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3" />
-        <Divider style={{marginTop: 20}} />
-        <h3>Client</h3>
         <div style={{width: '100%', height: '100%', position: 'absolute'}}>
           <AppMap />  
           <React.Fragment>
-            <SwipeableTemporaryDrawer />
-            <SettingDrawer open={this.state.openSetting} onClose={()=>this.setState({openSetting: false})} />
+            <SwipeableTemporaryDrawer client={client} />
+            <SettingDrawer client={client} open={this.state.openSetting} onClose={()=>this.setState({openSetting: false})} />
           </React.Fragment>
         </div>
-        <ClientSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3"/>
         <div onClick={()=> this.setState({openSetting: true}) } style={{position: 'absolute', bottom: 22, right: 10, zIndex: 999}}>
           <Button variant="contained" style={{padding: 6, minWidth: 40}}><SettingsIcon /></Button>
         </div>
