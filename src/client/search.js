@@ -1,8 +1,10 @@
 import React from 'react'
 import { ApolloProvider, useQuery } from '@apollo/client'
+import { Typography } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 import styles from '../styles.module.css'
 import {PLUGIN_SETTING_QUERY} from '../queries/pluginQuery'
-import L from 'leaflet'
+import PubSub from 'pubsub-js'
 
 const ClientSearch = (props) => {
 
@@ -11,10 +13,13 @@ const ClientSearch = (props) => {
       variables: { id: props.settingId}
     })
 
-    console.log('this is data', data)
-
     return(
-      <div>this is setting</div>
+      <div style={{padding: 10}} >
+        <Typography variant="subtitle2" gutterBottom>
+          Measure distances and areas
+        </Typography>
+        <Button variant="contained" onClick={()=> PubSub.publish("start-measure") }>Measure</Button>
+      </div>
     )
   }
 
