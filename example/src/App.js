@@ -1,12 +1,17 @@
 import React from 'react'
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { AdminSearch, ClientSearch } from 'search'
-import { withStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import { makeExecutableSchema } from 'graphql-tools';
-import {typeDefs} from './schema/schema';
-import {resolvers} from './schema/resolvers';
-import { SchemaLink } from '@apollo/client/link/schema';
+import { withStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
+import SettingsIcon from '@material-ui/icons/Settings'
+import { makeExecutableSchema } from 'graphql-tools'
+import {typeDefs} from './schema/schema'
+import {resolvers} from './schema/resolvers'
+import { SchemaLink } from '@apollo/client/link/schema'
+import AppMap from './map'
+import SwipeableTemporaryDrawer from './drawer'
+import SettingDrawer from './settingDrawer'
 import 'search/dist/index.css'
 
 const schema = makeExecutableSchema({
@@ -28,16 +33,33 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-const App = props => {
-  const {classes} = props;
-  return(
-    <React.Fragment>
-      <div className={classes.container}>
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      openSetting: false
+    }
+  }
+
+  render() {
+    return(
+      <React.Fragment>
         <AdminSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3" />
         <Divider style={{marginTop: 20}} />
+        <h3>Client</h3>
+        <div style={{width: '100%', height: '100%', position: 'absolute'}}>
+          <AppMap />  
+          <React.Fragment>
+            <SwipeableTemporaryDrawer />
+            <SettingDrawer open={this.state.openSetting} onClose={()=>this.setState({openSetting: false})} />
+          </React.Fragment>
+        </div>
         <ClientSearch client={client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3"/>
-      </div>
-    </React.Fragment>
-  ) 
+        <div onClick={()=> this.setState({openSetting: true}) } style={{position: 'absolute', bottom: 22, right: 10, zIndex: 999}}>
+          <Button variant="contained" style={{padding: 6, minWidth: 40}}><SettingsIcon /></Button>
+        </div>
+      </React.Fragment>
+    ) 
+  }
 }
 export default withStyles(styles)(App);

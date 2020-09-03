@@ -72,7 +72,6 @@ const AdminSearch = (props) => {
 
   return(
     <ApolloProvider client={props.client}>
-      <h3>Setting</h3>
       <Form />        
     </ApolloProvider>
   )
