@@ -2,7 +2,7 @@ import React, {memo} from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
-import { AdminSearch } from 'search'
+import { AdminSetting } from 'search'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
@@ -39,7 +39,7 @@ const SettingDrawer = memo(props => {
     >
 			<IconButton className={clsx(classes.closeIcon)} onClick={props.onClose}><CloseIcon /></IconButton>
 			<div style={{padding: 20}}>
-				<AdminSearch client={props.client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3" />
+				<AdminSetting client={props.client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3" />
 			</div>
     </div>
   );

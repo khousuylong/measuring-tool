@@ -1,5 +1,5 @@
-import AdminSearch from './admin/search'
-import ClientSearch from './client/search'
+import AdminSetting from './admin/setting'
+import Client from './client/client'
 import MeasureTool from './l-libs/lPlugin'
 
-export {AdminSearch, ClientSearch, MeasureTool}
+export {AdminSetting, Client, MeasureTool}

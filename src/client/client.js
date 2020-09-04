@@ -6,7 +6,7 @@ import styles from '../styles.module.css'
 import {PLUGIN_SETTING_QUERY} from '../queries/pluginQuery'
 import PubSub from 'pubsub-js'
 
-const ClientSearch = (props) => {
+const Client = (props) => {
 
   const LoadSetting = () => {
     const {data} = useQuery(PLUGIN_SETTING_QUERY, {
@@ -30,4 +30,4 @@ const ClientSearch = (props) => {
   )
 }
 
-export default ClientSearch
+export default Client
