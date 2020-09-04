@@ -44,7 +44,7 @@ class App extends React.Component {
     return(
       <React.Fragment>
         <div style={{width: '100%', height: '100%', position: 'absolute'}}>
-          <AppMap />  
+          <AppMap client={client}/>  
           <React.Fragment>
             <SwipeableTemporaryDrawer client={client} />
             <SettingDrawer client={client} open={this.state.openSetting} onClose={()=>this.setState({openSetting: false})} />

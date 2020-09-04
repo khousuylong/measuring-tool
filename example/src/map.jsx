@@ -11,7 +11,7 @@ const AppMap = memo(props=>{
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			<ZoomControl position="topright"/>
-			<MeasureTool />
+			<MeasureTool client={props.client} settingId="b67635cc-cb47-4aaf-b37b-42e470acfef3"/>
 		</Map>
 	)
 })
