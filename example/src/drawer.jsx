@@ -84,7 +84,6 @@ const SwipeableTemporaryDrawer = function(props) {
   return (
     <div>
 			<React.Fragment key={anchor}>
-				<Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
 				<SwipeableDrawer
 					classes={{paper:classes.drawerRoot}}
 					anchor={anchor}
