@@ -1,6 +1,6 @@
 import React, {memo} from 'react'
 import { Map, TileLayer, ZoomControl } from 'react-leaflet'
-import { MeasureTool } from 'search'
+import {MeasureTool} from 'search'
 
 const AppMap = memo(props=>{
 	const position = [51.505, -0.09]
